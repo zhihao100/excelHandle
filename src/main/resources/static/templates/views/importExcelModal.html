@@ -1,0 +1,83 @@
+	<div class="panel panel-default">
+		<div>
+			<button type="button" class="close" 
+				aria-hidden="true" ng-click="cancel()">×</button>
+		</div>
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#exportTemplate" data-toggle="tab">导出模板</a></li>
+			<li><a href="#importTasks" data-toggle="tab">导入</a></li>
+		</ul>
+		<div class="panel-body">
+		  <div id="exportTemplate" class="tab-panel fade in active" role="tabpanel">
+		  	<form class="form-horizontal searchbox" action="{{vm.url}}">
+				<div class="form-body">
+					<div class="row">
+						<div class="col-md-12" style="text-align: center;">
+							<button type="submit" class="btn btn-primary">
+								<i class="icon-share-alt"></i> 导出
+							</button>
+							<button type="button" class="btn btn-default" ng-click="cancel()">
+								取消
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>	
+		  </div>
+		  
+		  <div id="importTasks" class="tab-panel fade" role="tabpanel">
+				<form class="form-horizontal">
+					<div class="form-body">
+						<div class="row"  >
+							<div class="form-group">
+									<div class="col-md-3 col-md-offset-2">
+										<div class="input-group">
+											<input type="text" name="fileName" class="form-control"
+												readonly="readonly" ng-model="fileItem.name"/>
+										</div>
+									</div>
+									<div class="preview btn btn-primary col-md-1"> 
+										<input type="file" nv-file-select="" uploader="uploader" accept=".xls,.xlsx" ng-click="clearItems()"/> 浏览
+									</div>
+								</div>
+						</div>
+						<div class="row">
+							<div class="col-md-offset-2 col-md-10" style="color:#e02222;">*请选择excel文件，支持.xls、.xlsx格式</div>
+							<div class="col-md-offset-2 col-md-10" style="color:#e02222;">*导入前请导出模板，以免批量导入数据格式有误！</div>
+						</div><br/>
+					</div>
+				</form>	
+				<div class="modal-footer" style="text-align:center;">
+					<button type="button" class="btn btn-primary"
+					data-ng-click="ok()" ng-disabled="!uploader.queue.length">
+						确认
+					</button>
+					<button type="button" class="btn default" ng-click="cancel()">
+						取消
+					</button>
+			   </div>		
+		</div>
+		
+	</div>
+  </div>
+<style type="text/css">
+	.preview{
+		cursor: pointer;
+		position: relative;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.preview input{
+		position: absolute;
+		left: 0;
+		top: 0;
+		opacity: 0;
+		width:100%;
+	}
+</style>
+<script>
+    $('#myTab a').bind("click",function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+</script>
